@@ -18,16 +18,27 @@ class ListMoviesController extends Controller
     {
         $search = $request->query('search', []);
 
+        $limit = (int) ($request->limit ?: 20);
+        $page = (int) ($request->page && $request->page > 0 ? $request->page : 1);
+        $skip = ($page - 1) * $limit;
+
         $this->validateSearch($search);
 
         $movies = $this->createQueryBuilder($search)
+            ->skip($skip)
+            ->take($limit)
             ->get()
             ->makeHidden(['actors', 'genders'])
         ;
 
+        $total = Movie::all()->count();
+
         return response()->json([
             'items' => $movies,
-            'total' => Movie::all()->count(),
+            'total' => $total,
+            'limit' => $limit,
+            'page' => $page,
+            'has_more' => $total > $page * $limit,
         ]);
     }
 

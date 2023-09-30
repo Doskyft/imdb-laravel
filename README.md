@@ -49,6 +49,28 @@ php artisan serve
 
 ## API Endpoints
 
+Tous les endpoints de listes sont paginés avec 20 résultats par page.
+Vous pouvez changer le nombre de résultats par page en ajoutant le paramètre `limit` dans l'URL et ajouter le numéro de
+page avec le paramètre `page`.
+
+Tous les endpoints de listes renvoient une réponse suivant cet exemple :
+    
+```json
+{
+  "items": [
+    {
+      "id": 1,
+      "created_at": "2021-09-26T14:00:00.000000Z",
+      "updated_at": "2021-09-26T14:00:00.000000Z"
+    }
+  ],
+  "total": 10,
+  "limit": 2,
+  "page": 3,
+  "has_more": true
+}
+```
+
 ### Acteurs
 
 | Method | URI             | Controller                                         | Description               |
