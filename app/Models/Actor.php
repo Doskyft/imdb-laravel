@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @method static findOrFail(string $id)
+ * @method static create(array $all)
+ */
 class Actor extends Model
 {
     use HasFactory;
@@ -18,6 +22,11 @@ class Actor extends Model
     protected $fillable = [
         'first_name',
         'last_name',
+    ];
+
+    public static array $validate = [
+        'first_name' => ['required', 'string'],
+        'last_name' => ['required', 'string'],
     ];
 
     public function movies(): BelongsToMany

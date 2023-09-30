@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @method static findOrFail(string $id): Gender
+ * @method static create($all): Gender
+ */
 class Gender extends Model
 {
     use HasFactory;
@@ -17,6 +21,10 @@ class Gender extends Model
      */
     protected $fillable = [
         'name',
+    ];
+
+    public static array $validate = [
+        'name' => ['required', 'string', 'max:255'],
     ];
 
     public function movies(): BelongsToMany

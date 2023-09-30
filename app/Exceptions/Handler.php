@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +32,19 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e): \Illuminate\Http\Response|JsonResponse|Response|RedirectResponse
+    {
+        $status = match ($e::class) {
+            ModelNotFoundException::class, NotFoundHttpException::class => Response::HTTP_NOT_FOUND,
+            ValidationException::class => Response::HTTP_BAD_REQUEST,
+            default => Response::HTTP_INTERNAL_SERVER_ERROR,
+        };
+
+        return response()->json(
+            data: ['error' => $e->getMessage()],
+            status: $status,
+        );
     }
 }

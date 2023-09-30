@@ -1,5 +1,20 @@
 <?php
 
+use App\Http\Controllers\Actors\CreateActorsController;
+use App\Http\Controllers\Actors\DeleteActorsController;
+use App\Http\Controllers\Actors\ListActorsController;
+use App\Http\Controllers\Actors\ShowActorsController;
+use App\Http\Controllers\Actors\UpdateActorsController;
+use App\Http\Controllers\Genders\CreateGendersController;
+use App\Http\Controllers\Genders\DeleteGendersController;
+use App\Http\Controllers\Genders\ListGendersController;
+use App\Http\Controllers\Genders\ShowGendersController;
+use App\Http\Controllers\Genders\UpdateGendersController;
+use App\Http\Controllers\Movies\CreateMoviesController;
+use App\Http\Controllers\Movies\DeleteMoviesController;
+use App\Http\Controllers\Movies\ListMoviesController;
+use App\Http\Controllers\Movies\ShowMoviesController;
+use App\Http\Controllers\Movies\UpdateMoviesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +32,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/movies', ListMoviesController::class);
+Route::get('/movies/{id}', ShowMoviesController::class);
+Route::post('/movies', CreateMoviesController::class);
+Route::put('/movies/{id}', UpdateMoviesController::class);
+Route::delete('/movies/{id}', DeleteMoviesController::class);
+
+Route::get('/actors', ListActorsController::class);
+Route::get('/actors/{id}', ShowActorsController::class);
+Route::post('/actors', CreateActorsController::class);
+Route::put('/actors/{id}', UpdateActorsController::class);
+Route::delete('/actors/{id}', DeleteActorsController::class);
+
+Route::get('/genders', ListGendersController::class);
+Route::get('/genders/{id}', ShowGendersController::class);
+Route::post('/genders', CreateGendersController::class);
+Route::put('/genders/{id}', UpdateGendersController::class);
+Route::delete('/genders/{id}', DeleteGendersController::class);

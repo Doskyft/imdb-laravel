@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @method static create(array $array): Movie
+ * @method static findOrFail(string $id): Movie
+ */
 class Movie extends Model
 {
     use HasFactory;
@@ -30,6 +34,13 @@ class Movie extends Model
     protected $casts = [
         'release_year' => 'int',
         'duration' => 'int',
+    ];
+
+    public static array $validate = [
+        'title' => ['required', 'max:100'],
+        'synopsis' => ['required'],
+        'release_year' => ['required', 'numeric', 'min:0'],
+        'duration' => ['required'],
     ];
 
     public function actors(): BelongsToMany
