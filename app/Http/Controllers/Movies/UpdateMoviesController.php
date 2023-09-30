@@ -20,10 +20,13 @@ class UpdateMoviesController extends Controller
 
         $this->validate($request, Movie::$validate);
 
+        $movie->actors()->sync($request->get('actors'));
+        $movie->genders()->sync($request->get('genders'));
+
         $movie->update($request->all());
 
         return response()->json(
-            data: $request,
+            data: $movie->refresh(),
             status: Response::HTTP_OK,
         );
     }

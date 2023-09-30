@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @method static create(array $array): Movie
- * @method static findOrFail(string $id): Movie
+ * @method static Movie create(array $array)
+ * @method static Movie findOrFail(mixed $id, $columns = ['*'])
  */
 class Movie extends Model
 {
@@ -41,6 +41,11 @@ class Movie extends Model
         'synopsis' => ['required'],
         'release_year' => ['required', 'numeric', 'min:0'],
         'duration' => ['required'],
+    ];
+
+    protected $with = [
+        'actors',
+        'genders',
     ];
 
     public function actors(): BelongsToMany

@@ -13,7 +13,7 @@ class ListMoviesController extends Controller
         $movies = Movie::all();
 
         return response()->json([
-            'items' => $movies,
+            'items' => $movies->makeHidden(['actors', 'genders']),
             'total' => $movies->count(),
         ]);
     }

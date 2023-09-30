@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @method static findOrFail(string $id)
- * @method static create(array $all)
+ * @method static Actor findOrFail(string $id)
+ * @method static Actor create(array $all)
  */
 class Actor extends Model
 {
@@ -27,6 +27,10 @@ class Actor extends Model
     public static array $validate = [
         'first_name' => ['required', 'string'],
         'last_name' => ['required', 'string'],
+    ];
+
+    protected $hidden = [
+        'pivot',
     ];
 
     public function movies(): BelongsToMany

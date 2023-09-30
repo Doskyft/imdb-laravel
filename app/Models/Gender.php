@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @method static findOrFail(string $id): Gender
- * @method static create($all): Gender
+ * @method static Gender findOrFail(string $id)
+ * @method static Gender create($all)
  */
 class Gender extends Model
 {

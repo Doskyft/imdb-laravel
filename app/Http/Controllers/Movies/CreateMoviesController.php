@@ -20,10 +20,13 @@ class CreateMoviesController extends Controller
 
         $movie = Movie::create($request->all());
 
+        $movie->actors()->sync($request->get('actors'));
+        $movie->genders()->sync($request->get('genders'));
+
         $movie->save();
 
         return response()->json(
-            data: $movie,
+            data: Movie::findOrFail($movie->id),
             status: Response::HTTP_CREATED
         );
     }

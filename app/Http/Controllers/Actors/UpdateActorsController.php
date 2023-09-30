@@ -23,7 +23,7 @@ class UpdateActorsController extends Controller
         $actor->update($request->all());
 
         return response()->json(
-            data: $request,
+            data: $actor->refresh(),
             status: Response::HTTP_OK,
         );
     }

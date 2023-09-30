@@ -16,14 +16,14 @@ class UpdateGendersController extends Controller
      */
     public function __invoke(string $id, Request $request): JsonResponse
     {
-        $movie = Gender::findOrFail($id);
+        $gender = Gender::findOrFail($id);
 
         $this->validate($request, Gender::$validate);
 
-        $movie->update($request->all());
+        $gender->update($request->all());
 
         return response()->json(
-            data: $request,
+            data: $gender->refresh(),
             status: Response::HTTP_OK,
         );
     }
