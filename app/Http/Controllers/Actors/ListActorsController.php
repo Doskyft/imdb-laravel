@@ -10,11 +10,9 @@ class ListActorsController extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        $actors = Actor::all();
-
         return response()->json([
-            'items' => $actors,
-            'total' => $actors->count(),
+            'items' => Actor::all(),
+            'total' => Actor::all()->count(),
         ]);
     }
 }

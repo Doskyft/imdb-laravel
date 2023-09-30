@@ -10,11 +10,9 @@ class ListGendersController extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        $genders = Gender::all();
-
         return response()->json([
-            'items' => $genders,
-            'total' => count($genders),
+            'items' => Gender::all(),
+            'total' => Gender::all()->count()
         ]);
     }
 }
