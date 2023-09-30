@@ -47,6 +47,12 @@ cp .env.example .env
 php artisan serve
 ```
 
+## API Authentication
+
+Pour utiliser l'API, vous devez vous authentifier avec un compte utilisateur.
+L'authentification se fait avec une clé API, stoké en base de donnée.
+Dans une requête HTTP, vous devez ajouter un header `Authorization` avec la valeur de votre `api_key`.
+
 ## API Endpoints
 
 Tous les endpoints de listes sont paginés avec 20 résultats par page.

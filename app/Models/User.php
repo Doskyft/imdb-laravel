@@ -30,6 +30,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'api_key',
     ];
 
     /**
@@ -41,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            event(new \App\Events\GenerateApiKey($user));
+        });
+    }
 }
