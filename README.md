@@ -101,6 +101,14 @@ Tous les endpoints de listes renvoient une réponse suivant cet exemple :
 | PUT    | api/movies/{id} | App\Http\Controllers\Movies\UpdateMoviesController | Met à jour un film      |
 | DELETE | api/movies/{id} | App\Http\Controllers\Movies\DeleteMoviesController | Supprime un film        |
 
+Les films peuvent être filtrés par titre, genre ou acteur en ajoutant le paramètre `search` dans l'URL.
+
+Exemple :
+
+- `api/movies?search[genre]=1` pour récupérer tous les films du genre avec l'id 1.
+- `api/movies?search[actor]=1` pour récupérer tous les films avec l'acteur avec l'id 1.
+- `api/movies?search[title]=Film 1` pour récupérer tous les films avec le titre "Film 1".
+
 ### Genres
 
 | Method | URI              | Controller                                           | Description              |
