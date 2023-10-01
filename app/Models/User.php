@@ -32,6 +32,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'api_key',
+        'is_administrator',
     ];
 
     /**
@@ -66,5 +67,10 @@ class User extends Authenticatable
     public function actors(): HasMany
     {
         return $this->hasMany(Actor::class);
+    }
+
+    public function isAdministrator(): bool
+    {
+        return $this->is_administrator;
     }
 }
