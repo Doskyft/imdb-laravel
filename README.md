@@ -44,6 +44,10 @@ cp .env.example .env
 ```
 
 ```bash
+php artisan migrate:fresh --seed
+```
+
+```bash
 php artisan serve
 ```
 
