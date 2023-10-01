@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ApiKeyAuthMiddleware
 {
@@ -22,8 +23,8 @@ class ApiKeyAuthMiddleware
             return response()->json(['message' => 'Clé API invalide'], 401);
         }
 
-        // Stockez l'utilisateur authentifié dans la demande
-        $request->user = $user;
+        // Authentification de l'utilisateur
+        Auth::login($user);
 
         return $next($request);
     }
