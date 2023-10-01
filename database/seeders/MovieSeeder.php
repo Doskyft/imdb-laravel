@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Movie;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class MovieSeeder extends Seeder
@@ -12,6 +13,10 @@ class MovieSeeder extends Seeder
      */
     public function run(): void
     {
-        Movie::factory(10)->create();
+        $user = User::first();
+
+        Movie::factory(10)->create([
+            'user_id' => $user->id,
+        ]);
     }
 }
