@@ -47,20 +47,4 @@ class MoviePolicy
     {
         return $movie->user()->is($user);
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(): bool
-    {
-        return false;
-    }
 }
