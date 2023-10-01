@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Actor;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ActorSeeder extends Seeder
@@ -12,6 +13,10 @@ class ActorSeeder extends Seeder
      */
     public function run(): void
     {
-        Actor::factory(10)->create();
+        $user = User::first();
+
+        Actor::factory(10)->create([
+            'user_id' => $user->id,
+        ]);
     }
 }

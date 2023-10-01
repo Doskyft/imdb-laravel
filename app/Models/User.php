@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Movie::class);
     }
+
+    public function genders(): HasMany
+    {
+        return $this->hasMany(Gender::class);
+    }
+
+    public function actors(): HasMany
+    {
+        return $this->hasMany(Actor::class);
+    }
 }

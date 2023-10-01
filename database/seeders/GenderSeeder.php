@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Gender;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class GenderSeeder extends Seeder
@@ -12,6 +13,10 @@ class GenderSeeder extends Seeder
      */
     public function run(): void
     {
-        Gender::factory(10)->create();
+        $user = User::first();
+
+        Gender::factory(10)->create([
+            'user_id' => $user->id,
+        ]);
     }
 }
