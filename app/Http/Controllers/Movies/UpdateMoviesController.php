@@ -14,10 +14,8 @@ class UpdateMoviesController extends Controller
     /**
      * @throws ValidationException
      */
-    public function __invoke(string $id, Request $request): JsonResponse
+    public function __invoke(Movie $movie, Request $request): JsonResponse
     {
-        $movie = Movie::findOrFail($id);
-
         $this->validate($request, Movie::$validate);
 
         $movie->actors()->sync($request->get('actors'));

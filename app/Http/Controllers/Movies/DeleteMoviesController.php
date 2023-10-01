@@ -10,10 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DeleteMoviesController extends Controller
 {
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(Movie $movie): JsonResponse
     {
-        $movie = Movie::findOrFail($id);
-
         $movie->delete();
 
         return response()->json(status: Response::HTTP_NO_CONTENT);

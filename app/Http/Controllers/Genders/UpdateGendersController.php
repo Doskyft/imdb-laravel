@@ -14,10 +14,8 @@ class UpdateGendersController extends Controller
     /**
      * @throws ValidationException
      */
-    public function __invoke(string $id, Request $request): JsonResponse
+    public function __invoke(Gender $gender, Request $request): JsonResponse
     {
-        $gender = Gender::findOrFail($id);
-
         $this->validate($request, Gender::$validate);
 
         $gender->update($request->all());

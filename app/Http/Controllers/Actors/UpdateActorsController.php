@@ -14,10 +14,8 @@ class UpdateActorsController extends Controller
     /**
      * @throws ValidationException
      */
-    public function __invoke(string $id, Request $request): JsonResponse
+    public function __invoke(Actor $actor, Request $request): JsonResponse
     {
-        $actor = Actor::findOrFail($id);
-
         $this->validate($request, Actor::$validate);
 
         $actor->update($request->all());

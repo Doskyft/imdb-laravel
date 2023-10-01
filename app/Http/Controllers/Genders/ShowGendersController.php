@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ShowGendersController extends Controller
 {
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(Gender $gender): JsonResponse
     {
-        return response()->json(Gender::findOrFail($id));
+        return response()->json($gender);
     }
 }

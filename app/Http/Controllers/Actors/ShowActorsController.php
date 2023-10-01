@@ -8,8 +8,8 @@ use Illuminate\Http\JsonResponse;
 
 class ShowActorsController extends Controller
 {
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(Actor $actor): JsonResponse
     {
-        return response()->json(Actor::findOrFail($id));
+        return response()->json($actor);
     }
 }

@@ -9,10 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DeleteGendersController extends Controller
 {
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(Gender $gender): JsonResponse
     {
-        $gender = Gender::findOrFail($id);
-
         $gender->delete();
 
         return response()->json(status: Response::HTTP_NO_CONTENT);

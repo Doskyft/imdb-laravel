@@ -16,6 +16,7 @@ use App\Http\Controllers\Movies\ListMoviesController;
 use App\Http\Controllers\Movies\ShowMoviesController;
 use App\Http\Controllers\Movies\UpdateMoviesController;
 use App\Http\Middleware\ApiKeyAuthMiddleware;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,50 +32,50 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([ApiKeyAuthMiddleware::class])->group(function () {
     Route::get('/movies', ListMoviesController::class)
-        ->middleware('can:viewAny,'.App\Models\Movie::class)
+        ->can('viewAny', App\Models\Movie::class)
     ;
-    Route::get('/movies/{id}', ShowMoviesController::class)
-        ->middleware('can:view,'.App\Models\Movie::class)
+    Route::get('/movies/{movie}', ShowMoviesController::class)
+        ->can('view', 'movie')
     ;
     Route::post('/movies', CreateMoviesController::class)
-        ->middleware('can:create,'.App\Models\Movie::class)
+        ->can('create', App\Models\Movie::class)
     ;
-    Route::put('/movies/{id}', UpdateMoviesController::class)
-        ->middleware('can:update,'.App\Models\Movie::class)
+    Route::put('/movies/{movie}', UpdateMoviesController::class)
+        ->can('update', 'movie')
     ;
-    Route::delete('/movies/{id}', DeleteMoviesController::class)
-        ->middleware('can:delete,'.App\Models\Movie::class)
+    Route::delete('/movies/{movie}', DeleteMoviesController::class)
+        ->can('delete', 'movie')
     ;
 
     Route::get('/actors', ListActorsController::class)
-        ->middleware('can:viewAny,'.App\Models\Actor::class)
+        ->can('viewAny', App\Models\Actor::class)
     ;
-    Route::get('/actors/{id}', ShowActorsController::class)
-        ->middleware('can:view,'.App\Models\Actor::class)
+    Route::get('/actors/{actor}', ShowActorsController::class)
+        ->can('view', 'actor')
     ;
     Route::post('/actors', CreateActorsController::class)
-        ->middleware('can:create,'.App\Models\Actor::class)
+        ->can('create', App\Models\Actor::class)
     ;
-    Route::put('/actors/{id}', UpdateActorsController::class)
-        ->middleware('can:update,'.App\Models\Actor::class)
+    Route::put('/actors/{actor}', UpdateActorsController::class)
+        ->can('update', 'actor')
     ;
-    Route::delete('/actors/{id}', DeleteActorsController::class)
-        ->middleware('can:delete,'.App\Models\Actor::class)
+    Route::delete('/actors/{actor}', DeleteActorsController::class)
+        ->can('delete', 'actor')
     ;
 
     Route::get('/genders', ListGendersController::class)
-        ->middleware('can:viewAny,'.App\Models\Gender::class)
+        ->can('viewAny', App\Models\Gender::class)
     ;
-    Route::get('/genders/{id}', ShowGendersController::class)
-        ->middleware('can:view,'.App\Models\Gender::class)
+    Route::get('/genders/{gender}', ShowGendersController::class)
+        ->can('view', 'gender')
     ;
     Route::post('/genders', CreateGendersController::class)
-        ->middleware('can:create,'.App\Models\Gender::class)
+        ->can('create', App\Models\Gender::class)
     ;
-    Route::put('/genders/{id}', UpdateGendersController::class)
-        ->middleware('can:update,'.App\Models\Gender::class)
+    Route::put('/genders/{gender}', UpdateGendersController::class)
+        ->can('update', 'gender')
     ;
-    Route::delete('/genders/{id}', DeleteGendersController::class)
-        ->middleware('can:delete,'.App\Models\Gender::class)
+    Route::delete('/genders/{gender}', DeleteGendersController::class)
+        ->can('delete', 'gender')
     ;
 });
