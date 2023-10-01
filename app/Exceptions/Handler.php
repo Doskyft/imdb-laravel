@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
@@ -39,6 +40,7 @@ class Handler extends ExceptionHandler
         $status = match ($e::class) {
             ModelNotFoundException::class, NotFoundHttpException::class => Response::HTTP_NOT_FOUND,
             ValidationException::class => Response::HTTP_BAD_REQUEST,
+            AuthorizationException::class => Response::HTTP_UNAUTHORIZED,
             default => Response::HTTP_INTERNAL_SERVER_ERROR,
         };
 
